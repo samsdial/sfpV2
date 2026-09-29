@@ -1,0 +1,42 @@
+model CreditCardProfile {
+  id              String           @id @default(cuid())
+  accountId       String           @unique
+  account         FinancialAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  creditLimitCents BigInt
+  cutDay          Int
+  paymentDay      Int
+  annualRateEa    Decimal          @db.Decimal(9, 6)
+  usualPayment    String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model Loan {
+  id                String   @id @default(cuid())
+  userId            String
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name              String
+  initialCents      BigInt
+  balanceCents      BigInt
+  monthlyPaymentCents BigInt
+  annualRateEa      Decimal  @db.Decimal(9, 6)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  payments LoanPayment[]
+
+  @@index([userId])
+}
+
+model LoanPayment {
+  id            String      @id @default(cuid())
+  loanId        String
+  loan          Loan        @relation(fields: [loanId], references: [id], onDelete: Cascade)
+  transactionId String?
+  transaction   Transaction? @relation(fields: [transactionId], references: [id])
+  amountCents   BigInt
+  paidAt        DateTime    @db.Date
+  createdAt     DateTime    @default(now())
+
+  @@index([loanId])
+}

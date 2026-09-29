@@ -1,0 +1,28 @@
+model Asset {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name         String
+  assetType    String
+  valueCents   BigInt
+  notes        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model NetWorthSnapshot {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  period          String   @db.Char(7)
+  liquidCents     BigInt
+  assetsCents     BigInt
+  loansCents      BigInt
+  netWorthCents   BigInt
+  createdAt       DateTime @default(now())
+
+  @@unique([userId, period])
+  @@index([userId])
+}

@@ -1,0 +1,11 @@
+model UserSettings {
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  currency          String   @default("COP") @db.Char(3)
+  timezone          String   @default("America/Bogota") @db.VarChar(64)
+  savingsTargetRate Decimal  @default(0.15) @db.Decimal(9, 6)
+  periodStartDay    Int      @default(1)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}

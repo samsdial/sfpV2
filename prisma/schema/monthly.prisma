@@ -1,0 +1,32 @@
+model Period {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  period    String   @db.Char(7)
+  status    String   @default("OPEN")
+  closedAt  DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  lines PeriodLine[]
+
+  @@unique([userId, period])
+  @@index([userId])
+}
+
+model PeriodLine {
+  id              String   @id @default(cuid())
+  periodId        String
+  period          Period   @relation(fields: [periodId], references: [id], onDelete: Cascade)
+  categoryId      String?
+  category        Category? @relation(fields: [categoryId], references: [id])
+  label           String
+  lineType        String
+  plannedCents    BigInt
+  paid            Boolean  @default(false)
+  transactionId   String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([periodId])
+}

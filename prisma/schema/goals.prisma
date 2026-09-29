@@ -1,0 +1,32 @@
+model SavingsGoal {
+  id                    String   @id @default(cuid())
+  userId                String
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name                  String
+  goalType              String   @default("OTHER")
+  targetCents           BigInt
+  currentCents          BigInt   @default(0)
+  monthlyRequiredCents  BigInt?
+  annualReturnRate      Decimal? @db.Decimal(9, 6)
+  targetDate            DateTime? @db.Date
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  contributions GoalContribution[]
+
+  @@index([userId])
+}
+
+model GoalContribution {
+  id            String       @id @default(cuid())
+  goalId        String
+  goal          SavingsGoal  @relation(fields: [goalId], references: [id], onDelete: Cascade)
+  transactionId String?
+  transaction   Transaction? @relation(fields: [transactionId], references: [id])
+  amountCents   BigInt
+  contributedAt DateTime     @db.Date
+  note          String?
+  createdAt     DateTime     @default(now())
+
+  @@index([goalId])
+}

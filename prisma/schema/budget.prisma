@@ -1,0 +1,31 @@
+model BudgetIncome {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  label       String
+  incomeType  String   @default("FIXED")
+  amountCents BigInt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model BudgetExpense {
+  id           String     @id @default(cuid())
+  userId       String
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId   String
+  category     Category   @relation(fields: [categoryId], references: [id])
+  label        String
+  amountCents  BigInt
+  periodicity  String     @default("MONTHLY")
+  isFixed      Boolean    @default(true)
+  paidByCard   Boolean    @default(false)
+  isAntExpense Boolean    @default(false)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index([userId])
+  @@index([categoryId])
+}

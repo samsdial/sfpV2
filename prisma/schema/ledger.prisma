@@ -1,0 +1,109 @@
+model FinancialAccount {
+  id             String      @id @default(cuid())
+  userId         String
+  user           User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name           String
+  type           AccountType
+  initialBalance BigInt      @default(0)
+  currency       String      @default("COP") @db.Char(3)
+  archived       Boolean     @default(false)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  transactions         Transaction[]       @relation("TransactionAccount")
+  transfersFrom        Transaction[]       @relation("TransferFromAccount")
+  creditCardProfile    CreditCardProfile?
+
+  @@index([userId])
+}
+
+enum AccountType {
+  CASH
+  BANK
+  CREDIT_CARD
+  SAVINGS
+  INVESTMENT
+  DIGITAL_WALLET
+}
+
+model Category {
+  id       String       @id @default(cuid())
+  userId   String
+  user     User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name     String
+  parentId String?
+  parent   Category?    @relation("CategoryTree", fields: [parentId], references: [id])
+  children Category[]   @relation("CategoryTree")
+  kind     CategoryKind
+  color    String?
+  icon     String?
+  archived Boolean      @default(false)
+
+  transactions   Transaction[]
+  budgetExpenses BudgetExpense[]
+  periodLines    PeriodLine[]
+
+  @@index([userId])
+  @@index([parentId])
+}
+
+enum CategoryKind {
+  EXPENSE
+  INCOME
+  TRANSFER
+}
+
+model Tag {
+  id       String @id @default(cuid())
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name     String
+  color    String?
+
+  transactions TransactionTag[]
+
+  @@unique([userId, name])
+}
+
+model Transaction {
+  id             String          @id @default(cuid())
+  userId         String
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type           TransactionType
+  accountId      String
+  account        FinancialAccount  @relation("TransactionAccount", fields: [accountId], references: [id])
+  transferFromId String?
+  transferFrom   FinancialAccount? @relation("TransferFromAccount", fields: [transferFromId], references: [id])
+  categoryId     String?
+  category       Category?         @relation(fields: [categoryId], references: [id])
+  amount         BigInt
+  date           DateTime          @db.Date
+  description    String?
+  merchant       String?
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  tags            TransactionTag[]
+  loanPayments    LoanPayment[]
+  goalContribs    GoalContribution[]
+
+  @@index([userId, date])
+  @@index([accountId])
+  @@index([categoryId])
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+  TRANSFER
+}
+
+model TransactionTag {
+  transactionId String
+  transaction   Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  tagId         String
+  tag           Tag         @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([transactionId, tagId])
+  @@index([tagId])
+}
