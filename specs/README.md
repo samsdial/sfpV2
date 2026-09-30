@@ -163,7 +163,7 @@ Cada módulo se entrega funcionando en local, con tests, y desplegado en Hosting
 | Módulo | Spec | Implementación | Tag |
 |---|---|---|---|
 | 00-fundamentos | Listo para revisión | En repo | — |
-| M0 Núcleo | Listo para revisión | Desplegado prod ([URL](https://peru-cobra-411499.hostingersite.com/)); smoke parcial | `m0` |
+| M0 Núcleo | Listo para revisión | **Cierre** — prod OK; falta `ALLOW_SIGNUP=false` + smoke manual ([M0-CIERRE.md](../docs/M0-CIERRE.md)) | `m0` |
 | M1 Libro | Listo para revisión | Implementado (local) | `m1` |
 | M2 Presupuesto | Listo para revisión | Implementado (local) | `m2` |
 | M3 Ciclo mensual | Listo para revisión | Implementado (local) | `m3` |

@@ -5,11 +5,12 @@ import { StatusMessage } from '@/components/shared/StatusMessage';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { EmptyState } from '@/components/shared/EmptyState';
 
+/** Galería de componentes — solo desarrollo (M0). En producción: 404. */
 export default function DevUiPage() {
   if (process.env.NODE_ENV === 'production') notFound();
 
   return (
-    <>
+    <div className="mx-auto max-w-3xl px-4 py-8">
       <PageHeader title="Design system (dev)" description="Componentes compartidos M0." />
       <div className="space-y-8">
         <section>
@@ -30,6 +31,6 @@ export default function DevUiPage() {
         </section>
         <EmptyState title="Sin datos" description="Ejemplo de estado vacío." />
       </div>
-    </>
+    </div>
   );
 }

@@ -360,19 +360,19 @@ Responde `GET → { ok: true, db: "up" | "down", version: <package.json version>
 
 ## 10. Criterios de aceptación
 
-- [ ] Next 16.3.x (≥ 16.3.7), TypeScript estricto y lint, typecheck y tests en verde en CI.
-- [ ] La base local en Docker usa el mismo motor y versión que producción (documentado).
-- [ ] Prisma 7 con adaptador MariaDB y esquema multiarchivo; migración `m0_core` aplicada en local y en producción.
-- [ ] El usuario de Sergio existe en producción; `/registro` responde 404 con `ALLOW_SIGNUP=false`.
-- [ ] Sin sesión, cualquier ruta de `(app)` redirige a `/login`; una Server Action llamada sin sesión devuelve `fail`.
-- [ ] `/ajustes` guarda nombre, meta de ahorro y día de inicio; el mensaje motivacional cambia según el rango.
-- [ ] `money`, `dates`, `periodicity` y `finance-math` tienen tests que cubren los casos de §5.
-- [ ] El shell muestra la navegación completa; las rutas de M1–M7 muestran "en construcción"; funciona en móvil.
-- [ ] Tema claro y oscuro con tokens semánticos; `/dev/ui` muestra los componentes compartidos (solo en dev).
-- [ ] Las reglas de dependencia entre módulos se cumplen por lint.
-- [ ] Un push a `main` despliega en Hostinger; `/api/health` responde `db: "up"` con HTTPS.
-- [ ] `docs/DEPLOY.md` y `docs/smoke/m0.md` están completos y verificados.
-- [ ] Tag `m0`.
+- [x] Next 16.3.x (≥ 16.3.7), TypeScript estricto y lint, typecheck y tests en verde en CI.
+- [ ] La base local en Docker/Podman usa el mismo motor y versión que producción (documentado en DEPLOY — versión prod pendiente phpMyAdmin).
+- [x] Prisma 7 con adaptador MariaDB y esquema multiarchivo; migración `m0_core` aplicada en local y en producción.
+- [ ] El usuario de Sergio existe en producción; `/registro` responde 404 con `ALLOW_SIGNUP=false` _(pendiente variable en hPanel)_.
+- [x] Sin sesión, cualquier ruta de `(app)` redirige a `/login`; una Server Action llamada sin sesión devuelve `fail`.
+- [ ] `/ajustes` guarda nombre, meta de ahorro y día de inicio; el mensaje motivacional cambia según el rango _(smoke manual prod)_.
+- [x] `money`, `dates`, `periodicity` y `finance-math` tienen tests que cubren los casos de §5.
+- [x] El shell muestra la navegación completa; funciona en móvil _(M1–M7 evolucionaron post-M0)_.
+- [x] Tema claro y oscuro con tokens semánticos; `/dev/ui` muestra los componentes compartidos (solo en dev; 404 en prod).
+- [x] Las reglas de dependencia entre módulos se cumplen por lint.
+- [x] Un push a `main` despliega en Hostinger; `/api/health` responde `db: "up"` con HTTPS.
+- [x] `docs/DEPLOY.md`, `docs/smoke/m0.md` y `docs/M0-CIERRE.md` están completos.
+- [x] Tag `m0`.
 
 ## 11. Fuera de alcance
 
