@@ -74,5 +74,12 @@
   },
   "prisma": {
     "seed": "tsx prisma/seed/index.ts"
+  },
+  "overrides": {
+    "@prisma/adapter-mariadb": {
+      "mariadb": "3.4.7"
+    },
+    "mysql2": "3.24.5",
+    "deepmerge-ts": "8.0.2"
   }
 }
