@@ -45,8 +45,13 @@ const eslintConfig = defineConfig([
         {
           patterns: [
             {
-              group: ['@/modules/*/!(index)', '@/modules/*/*'],
-              message: 'Importa módulos solo desde @/modules/<modulo> (index.ts).',
+              group: [
+                '@/modules/*/repository/**',
+                '@/modules/*/services/**',
+                '@/modules/*/validators/**',
+              ],
+              message:
+                'No importes repository/services/validators de otro módulo; usa index.ts o Server Actions.',
             },
           ],
         },
