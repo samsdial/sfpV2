@@ -164,13 +164,13 @@ Cada módulo se entrega funcionando en local, con tests, y desplegado en Hosting
 |---|---|---|---|
 | 00-fundamentos | Listo para revisión | En repo | — |
 | M0 Núcleo | Listo para revisión | Implementado (local) | `m0` |
-| M1 Libro | Pendiente de redactar | Implementado (local) | `m1` |
-| M2 Presupuesto | Pendiente de redactar | Implementado (local) | `m2` |
-| M3 Ciclo mensual | Pendiente de redactar | Implementado (local) | `m3` |
-| M4 Deudas | Pendiente de redactar | Implementado (local) | `m4` |
-| M5 Metas | Pendiente de redactar | Implementado (local) | `m5` |
-| M6 Patrimonio | Pendiente de redactar | Implementado (local) | `m6` |
-| M7 Tablero | Pendiente de redactar | Implementado (local) | `m7` |
+| M1 Libro | Listo para revisión | Implementado (local) | `m1` |
+| M2 Presupuesto | Listo para revisión | Implementado (local) | `m2` |
+| M3 Ciclo mensual | Listo para revisión | Implementado (local) | `m3` |
+| M4 Deudas | Listo para revisión | Implementado (local) | `m4` |
+| M5 Metas | Listo para revisión | Implementado (local) | `m5` |
+| M6 Patrimonio | Listo para revisión | Implementado (local) | `m6` |
+| M7 Tablero | Listo para revisión | Implementado (local) | `m7` |
 
 ---
 

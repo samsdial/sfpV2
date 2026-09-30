@@ -1,5 +1,5 @@
 import { db } from '@/lib/db';
-import type { AccountType, FinancialAccount } from '@/generated/prisma';
+import type { AccountType, FinancialAccount } from '@/generated/prisma/client';
 import type { DbClient } from '@/modules/core';
 
 function client(tx?: DbClient) {

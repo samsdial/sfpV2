@@ -1,6 +1,8 @@
 export const ledgerCopy = {
   quickAdd: 'Registrar movimiento',
+  quickAddTitle: 'Registro rápido',
   quickAddTooltip: 'Atajo N',
+  saved: 'Movimiento guardado',
   noTransactions: 'Aún no hay movimientos',
   noTransactionsHint: 'Registra tu primer ingreso o gasto.',
   noAccounts: 'No tienes cuentas',

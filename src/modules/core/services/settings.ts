@@ -1,5 +1,5 @@
 import { db } from '@/lib/db';
-import type { UserSettings } from '@/generated/prisma';
+import type { UserSettings } from '@/generated/prisma/client';
 import type { DbClient } from './transaction';
 
 export async function getSettings(userId: string, tx?: DbClient): Promise<UserSettings> {

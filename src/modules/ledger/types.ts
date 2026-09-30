@@ -1,4 +1,4 @@
-import type { AccountType, CategoryKind, TransactionType } from '@/generated/prisma';
+import type { AccountType, CategoryKind, TransactionType } from '@/generated/prisma/client';
 
 export type TransactionListItem = {
   id: string;

@@ -38,9 +38,22 @@ npm run db:seed      # taxonomía ledger
 
 ## Local
 
-1. `docker compose up -d`
-2. Copiar `.env.example` → `.env`
-3. `npm install && npm run db:migrate`
-4. `npm run dev`
+Base de datos con **Podman** (mismo `docker-compose.yml`):
+
+```bash
+# macOS: una vez, si el socket no responde
+podman machine init    # solo la primera vez
+podman machine start
+
+podman compose up -d
+cp .env.example .env     # si aún no tienes .env
+npm install
+npm run db:migrate       # aplica migraciones en `sfp`
+npm run dev              # http://localhost:3000
+```
+
+Equivalente con Docker: `docker compose up -d`.
+
+Primer usuario: `ALLOW_SIGNUP=true` en `.env`, registro en `/registro`, luego `ALLOW_SIGNUP=false`. Seed opcional: `npm run db:seed`.
 
 Documentación de deploy: [docs/DEPLOY.md](docs/DEPLOY.md).

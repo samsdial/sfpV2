@@ -3,6 +3,7 @@ import { listAccounts, ledgerCopy } from '@/modules/ledger';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { Money } from '@/components/shared/Money';
 import { EmptyState } from '@/components/shared/EmptyState';
+import { CreateAccountForm } from '@/components/ledger/create-account-form';
 
 export default async function CuentasPage() {
   const user = await requireUser();
@@ -12,6 +13,7 @@ export default async function CuentasPage() {
   return (
     <>
       <PageHeader title="Cuentas" description="Saldos por cuenta financiera." />
+      <CreateAccountForm />
       {active.length === 0 ? (
         <EmptyState title={ledgerCopy.noAccounts} description={ledgerCopy.noAccountsHint} />
       ) : (

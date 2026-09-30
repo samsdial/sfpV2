@@ -1,6 +1,6 @@
 import type { CategoryKind, PrismaClient } from '../../src/generated/prisma/client';
 
-const TAGS = ['CD', 'TJ', 'PT', 'MR', 'PPS', 'SAM'] as const;
+const TAGS = ['CD', 'TJ', 'PT', 'MR', 'PPS', 'SAM', 'NOP'] as const;
 
 type CatSeed = { name: string; kind?: CategoryKind; children?: CatSeed[] };
 

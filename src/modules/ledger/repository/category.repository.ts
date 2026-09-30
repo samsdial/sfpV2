@@ -1,5 +1,5 @@
 import { db } from '@/lib/db';
-import type { Category, CategoryKind } from '@/generated/prisma';
+import type { Category, CategoryKind } from '@/generated/prisma/client';
 import type { DbClient } from '@/modules/core';
 
 function client(tx?: DbClient) {

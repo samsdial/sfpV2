@@ -34,8 +34,19 @@ export const createTransactionSchema = z
 
 export type CreateTransactionInput = z.infer<typeof createTransactionSchema>;
 
+export const updateTransactionSchema = createTransactionSchema.extend({
+  id: z.string().min(1),
+});
+
+export type UpdateTransactionInput = z.infer<typeof updateTransactionSchema>;
+
+export const deleteTransactionSchema = z.object({ id: z.string().min(1) });
+
 export const listTransactionsSchema = z.object({
   from: dateSchema.optional(),
   to: dateSchema.optional(),
   limit: z.number().int().min(1).max(200).optional(),
+  type: z.enum(['INCOME', 'EXPENSE', 'TRANSFER']).optional(),
+  accountId: z.string().optional(),
+  categoryId: z.string().optional(),
 });

@@ -1,7 +1,7 @@
 import { requireUser } from '@/lib/session';
 import { getSettings } from '@/modules/core';
 import { today, periodOf } from '@/lib/dates';
-import { AppShell } from '@/components/app/app-shell';
+import { AppShellWithQuickAdd } from '@/components/app/app-shell-with-quick-add';
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const user = await requireUser();
@@ -10,8 +10,8 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   const userName = user.name?.trim() || user.email.split('@')[0] || 'Usuario';
 
   return (
-    <AppShell userName={userName} currentPeriod={currentPeriod}>
+    <AppShellWithQuickAdd userId={user.id} userName={userName} currentPeriod={currentPeriod}>
       {children}
-    </AppShell>
+    </AppShellWithQuickAdd>
   );
 }

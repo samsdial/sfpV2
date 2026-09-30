@@ -1,4 +1,4 @@
-import type { CategoryKind } from '@/generated/prisma';
+import type { CategoryKind } from '@/generated/prisma/client';
 import type { DbClient } from '@/modules/core';
 import type { CategoryNode } from '../types';
 import * as categoryRepo from '../repository/category.repository';

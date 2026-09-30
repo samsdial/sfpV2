@@ -1,5 +1,5 @@
 import { db } from '@/lib/db';
-import type { Transaction, TransactionType } from '@/generated/prisma';
+import type { Transaction, TransactionType } from '@/generated/prisma/client';
 import type { DbClient } from '@/modules/core';
 
 function client(tx?: DbClient) {
@@ -39,14 +39,61 @@ export async function createTransactionRow(
   });
 }
 
+export async function findTransactionById(userId: string, id: string, tx?: DbClient) {
+  return client(tx).transaction.findFirst({
+    where: { id, userId },
+    include: { tags: true },
+  });
+}
+
+export async function deleteTransactionRow(userId: string, id: string, tx?: DbClient) {
+  await client(tx).transaction.deleteMany({ where: { id, userId } });
+}
+
+export async function updateTransactionRow(
+  userId: string,
+  id: string,
+  data: Omit<CreateTransactionRow, 'tagIds'> & { tagIds?: string[] },
+  tx?: DbClient,
+) {
+  const { tagIds, ...rest } = data;
+  await client(tx).transactionTag.deleteMany({ where: { transactionId: id } });
+  const owned = await client(tx).transaction.findFirst({ where: { id, userId } });
+  if (!owned) throw new Error('El registro no existe');
+
+  return client(tx).transaction.update({
+    where: { id },
+    data: {
+      ...rest,
+      ...(tagIds
+        ? {
+            tags: {
+              create: tagIds.map((tagId) => ({ tagId })),
+            },
+          }
+        : {}),
+    },
+  });
+}
+
 export async function listTransactions(
   userId: string,
-  opts: { from?: Date; to?: Date; limit?: number },
+  opts: {
+    from?: Date;
+    to?: Date;
+    limit?: number;
+    type?: TransactionType;
+    accountId?: string;
+    categoryId?: string;
+  },
   tx?: DbClient,
 ) {
   return client(tx).transaction.findMany({
     where: {
       userId,
+      ...(opts.type ? { type: opts.type } : {}),
+      ...(opts.accountId ? { accountId: opts.accountId } : {}),
+      ...(opts.categoryId ? { categoryId: opts.categoryId } : {}),
       ...(opts.from || opts.to
         ? {
             date: {

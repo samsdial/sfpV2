@@ -19,7 +19,7 @@ export function StatusMessage({
 }: {
   level: Level;
   title?: string;
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
 }) {
   const { icon: Icon, className: tone } = styles[level];
@@ -28,7 +28,7 @@ export function StatusMessage({
       <Icon className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
       <div>
         {title ? <p className="font-medium">{title}</p> : null}
-        <p className={title ? 'text-muted-foreground' : undefined}>{children}</p>
+        {children ? <p className={title ? 'text-muted-foreground' : undefined}>{children}</p> : null}
       </div>
     </div>
   );

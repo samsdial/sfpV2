@@ -5,12 +5,12 @@ Registro para coordinación del plan de 3 desarrolladores. **No sustituye** el O
 | Módulo | Spec detallado | Base normativa para implementación | Gate |
 |--------|----------------|-------------------------------------|------|
 | M0 | [specs/modulos/M0-nucleo/spec.md](../specs/modulos/M0-nucleo/spec.md) | Completo | **Abierto** |
-| M1 | Stub | [specs/README.md §4](../specs/README.md) + [spec-sfp-v0.1.md](../specs/referencias/spec-sfp-v0.1.md) (modelos libro) + [arquitectura.md](../specs/00-fundamentos/arquitectura.md) | **Abierto** (alcance README) |
-| M2 | Stub | README §4 + plantilla Excel | **Abierto** tras tag `m0` |
-| M3 | Stub | README §4 | **Abierto** tras M2 |
-| M4 | Stub | README §4 + v0.1 deudas | **Abierto** tras M1 |
-| M5 | Stub | README §4 | **Abierto** tras M3 |
-| M6 | Stub | README §4 | **Abierto** tras M4 |
-| M7 | Stub | README §4 | v1 tras M3; v2 tras M5+M6 |
+| M1 | [specs/modulos/M1-libro/spec.md](../specs/modulos/M1-libro/spec.md) | Spec redactado (pendiente OK Sergio) | **Redactado** — revisión Sergio |
+| M2 | [specs/modulos/M2-presupuesto/spec.md](../specs/modulos/M2-presupuesto/spec.md) | Spec redactado (pendiente OK Sergio) | **Redactado** — revisión Sergio |
+| M3 | [specs/modulos/M3-ciclo-mensual/spec.md](../specs/modulos/M3-ciclo-mensual/spec.md) | Spec redactado (pendiente OK Sergio) | **Redactado** — revisión Sergio |
+| M4 | [specs/modulos/M4-deudas/spec.md](../specs/modulos/M4-deudas/spec.md) | Spec redactado (pendiente OK Sergio) | **Redactado** — revisión Sergio |
+| M5 | [specs/modulos/M5-metas/spec.md](../specs/modulos/M5-metas/spec.md) | Spec redactado (pendiente OK Sergio) | **Redactado** — revisión Sergio |
+| M6 | [specs/modulos/M6-patrimonio/spec.md](../specs/modulos/M6-patrimonio/spec.md) | Spec redactado (pendiente OK Sergio) | **Redactado** — revisión Sergio |
+| M7 | [specs/modulos/M7-tablero/spec.md](../specs/modulos/M7-tablero/spec.md) | Spec redactado (pendiente OK Sergio) | **Redactado** — revisión Sergio |
 
-Actualizado al iniciar implementación automatizada del plan SFP v2.
+Actualizado: specs M1–M7 redactados en español; gate de implementación normativa permanece **pendiente OK de Sergio** hasta revisión explícita.

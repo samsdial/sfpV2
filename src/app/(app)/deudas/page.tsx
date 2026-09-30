@@ -2,6 +2,7 @@ import { requireUser } from '@/lib/session';
 import { getDebtsSummary, debtsCopy } from '@/modules/debts';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { Money } from '@/components/shared/Money';
+import { LoanSimulator } from '@/components/debts/loan-simulator';
 
 export default async function DeudasPage() {
   const user = await requireUser();
@@ -42,6 +43,9 @@ export default async function DeudasPage() {
             ))}
           </ul>
         )}
+      </section>
+      <section className="mt-8">
+        <LoanSimulator />
       </section>
     </>
   );

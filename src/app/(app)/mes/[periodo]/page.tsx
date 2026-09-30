@@ -1,13 +1,18 @@
 import { requireUser } from '@/lib/session';
-import { getPeriodDetail, monthlyCopy, openPeriod } from '@/modules/monthly';
+import { getPeriodDetail, getPeriodPlanVsReal, monthlyCopy, openPeriod } from '@/modules/monthly';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { Money } from '@/components/shared/Money';
+import { Thermometer } from '@/components/shared/Thermometer';
+import { PeriodPicker } from '@/components/shared/PeriodPicker';
 import { Button } from '@/components/ui/button';
 
 export default async function MesPage({ params }: { params: Promise<{ periodo: string }> }) {
   const { periodo } = await params;
   const user = await requireUser();
-  const period = await getPeriodDetail(user.id, periodo);
+  const [period, comparison] = await Promise.all([
+    getPeriodDetail(user.id, periodo),
+    getPeriodPlanVsReal(user.id, periodo),
+  ]);
 
   async function openPeriodFormAction() {
     'use server';
@@ -16,7 +21,18 @@ export default async function MesPage({ params }: { params: Promise<{ periodo: s
 
   return (
     <>
-      <PageHeader title={`${monthlyCopy.title} ${periodo}`} description="Pagos fijos del periodo." />
+      <PageHeader
+        title={`${monthlyCopy.title} ${periodo}`}
+        description="Plan vs real y pagos fijos."
+        actions={<PeriodPicker value={periodo} />}
+      />
+      <section className="mb-6 max-w-md">
+        <Thermometer value={comparison.spendRatio} className="mb-2" />
+        <p className="text-sm">
+          Gastos reales <Money cents={comparison.realExpenseCents} tone="negative" /> / plan{' '}
+          <Money cents={comparison.plannedExpenseCents} />
+        </p>
+      </section>
       {!period ? (
         <div className="space-y-4">
           <p className="text-sm text-muted-foreground">{monthlyCopy.noPeriod}</p>

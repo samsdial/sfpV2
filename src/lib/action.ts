@@ -1,7 +1,7 @@
 import type { ZodType } from 'zod';
 import { fail, ok, type Result } from '@/lib/result';
 import { getOptionalUser } from '@/lib/session';
-import { Prisma } from '@/generated/prisma';
+import { Prisma } from '@/generated/prisma/client';
 
 type User = { id: string; email: string; name: string | null };
 
