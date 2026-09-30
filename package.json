@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "postinstall": "prisma generate",
-    "build": "prisma migrate deploy && node scripts/maybe-seed.mjs && next build",
+    "build": "prisma migrate deploy && node scripts/maybe-seed.mjs && next build --webpack",
     "start": "next start -p ${PORT:-3000}",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
