@@ -1,5 +1,21 @@
 # Deploy — SFP v2
 
+## Producción
+
+| Campo | Valor |
+|--------|--------|
+| **URL** | https://peru-cobra-411499.hostingersite.com/ |
+| **Health** | https://peru-cobra-411499.hostingersite.com/api/health |
+| **Verificado** | 2026-09-30 — `ok: true`, `db: "up"` (curl) |
+| **`BETTER_AUTH_URL`** | Debe ser exactamente la URL HTTPS de arriba (sin barra final o consistente con Better Auth) |
+
+### Post-deploy (seguridad)
+
+1. Crear usuario en `/registro` si aún no existe.
+2. En hPanel: `ALLOW_SIGNUP=false` → redeploy ( `/registro` debe dar 404).
+3. Opcional: un deploy con `RUN_SEED=true` para taxonomía M1; luego `RUN_SEED=false`.
+4. En phpMyAdmin: `SELECT VERSION();` y completar la tabla de motor abajo.
+
 ## Base de datos local (Podman)
 
 Motor objetivo en local: **MariaDB 11.4** (`mariadb:11.4` en [docker-compose.yml](../docker-compose.yml)).
@@ -40,13 +56,13 @@ Cuando Hostinger confirme la versión, alinear la imagen local si la familia dif
 
 ### Primer deploy (checklist Dev A)
 
-- [ ] Push a `main` dispara build
-- [ ] `prisma migrate deploy` termina sin error en logs de build
-- [ ] `ALLOW_SIGNUP=true` → crear usuario en `/registro`
-- [ ] `ALLOW_SIGNUP=false` + redeploy → `/registro` responde 404
+- [x] App accesible en https://peru-cobra-411499.hostingersite.com/
+- [x] `GET /api/health` → `db: "up"` en HTTPS (2026-09-30)
+- [x] Sin sesión, `/` → redirect `/login?next=/` (307)
+- [ ] Confirmar en logs: `prisma migrate deploy` OK en build
+- [ ] `ALLOW_SIGNUP=false` + redeploy → `/registro` responde 404 _(hoy sigue habilitado)_
 - [ ] `RUN_SEED=true` un deploy → taxonomía M1; luego `false`
-- [ ] `GET /api/health` → `db: "up"` en HTTPS
-- [ ] Marcar [docs/smoke/m0.md](./smoke/m0.md) sección **Producción**
+- [ ] Smoke manual completo: [docs/smoke/m0.md](./smoke/m0.md) **Producción**
 
 ## Plan B (build sin acceso a DB)
 

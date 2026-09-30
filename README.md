@@ -2,6 +2,8 @@
 
 Finanzas personales de Sergio — monolito modular Next.js 16 + Prisma 7 + Better Auth.
 
+**Producción:** https://peru-cobra-411499.hostingersite.com/
+
 ## Versiones (septiembre 2026)
 
 | Paquete | Versión |
